@@ -1,8 +1,18 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Reset } from './components/Reset';
+import { Data } from './util/userData';
+
+
+
 
 function App() {
+  const localData = new Data({
+    temp: 20,
+    humidity: 15
+  })
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +28,7 @@ function App() {
         >
           Learn React
         </a>
+        <Reset userData={localData} ></Reset>
       </header>
     </div>
   );
