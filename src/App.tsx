@@ -6,7 +6,9 @@ import { Data } from './util/userData';
 import { Temperature } from './components/TempDial';
 
 
-
+export type Props = {
+  userData: Data
+}
 
 function App() {
   const localData = new Data({

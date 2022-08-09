@@ -1,8 +1,9 @@
 import { ButtonUnstyled } from "@mui/base";
-import { Data, userData } from "../util/userData";
+import { Props } from "../App";
+import { userData } from "../util/userData";
 
 
-export function Reset(props: { userData: Data; }): JSX.Element  {
+export function Reset({userData} : Props): JSX.Element  {
 
     const defaults : userData = {
         temp: 10,
@@ -10,8 +11,7 @@ export function Reset(props: { userData: Data; }): JSX.Element  {
     }
 
     const handleResetData = () : void => {
-        props.userData.setData(defaults)
-        console.log(props.userData.getData())
+        userData.setData(defaults)
     }
 
     return (

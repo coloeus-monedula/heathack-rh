@@ -4,6 +4,6 @@ export const calculateRelHumidity = (temp: number, humidity: number) : number =>
     return 0
 }
 
-export const isAtMaxHumidity = (temp: number, humidity: number): boolean => {
-    return false
+export const calculateMaxHumidity = (temp: number, humidity: number): number => {
+    return 10
 }

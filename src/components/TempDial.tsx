@@ -1,15 +1,15 @@
-import { Data, userData } from "../util/userData";
+import { userData } from "../util/userData";
 import CircularSlider from 'advanced-react-circular-slider';
 import 'advanced-react-circular-slider/main.css';
-import React from "react";
+import { Props } from "../App";
 
-export function Temperature(props: { userData: Data; }) {
+export function Temperature({userData}: Props) {
     const handleTempChange = (e: { key: string; value: number; }) : void => {
         const updatedData: userData = {
-            ... props.userData.getData(),
+            ... userData.getData(),
             "temp": e.value
         }
-        props.userData.setData(updatedData)
+        userData.setData(updatedData)
         // console.log(props.userData.getData())
     }
 
