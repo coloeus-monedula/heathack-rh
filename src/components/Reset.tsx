@@ -1,17 +1,17 @@
 import { ButtonUnstyled } from "@mui/base";
-import { Props } from "../App";
-import { userData } from "../util/userData";
+import { Data, Props } from "../App";
 
 
-export function Reset({userData} : Props): JSX.Element  {
+export function Reset({userData, updateData, defaults, setReset} : Props): JSX.Element  {
 
-    const defaults : userData = {
-        temp: 10,
-        humidity: 10
-    }
 
     const handleResetData = () : void => {
-        userData.setData(defaults)
+        updateData(defaults.data)
+        if (setReset) {
+            setReset(true)
+            // console.log("Reset")
+        }
+
     }
 
     return (

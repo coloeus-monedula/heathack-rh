@@ -1,39 +1,37 @@
 import { useEffect, useState } from "react"
 import { ButtonUnstyled } from "@mui/base"
-import { Props } from "../App"
-import { userData } from "../util/userData"
+import { Data, Props } from "../App"
 
-export function Dehumidifer({userData}: Props) {
+export function Dehumidifer({userData, updateData}: Props) {
     const [canClick, setCanClick] = useState<boolean>(true)
     
     const handleMinusHumidity = () => {
-        const humidity = userData.getData().humidity
-        if (humidity > 0) {
-            const updatedData : userData= {
-                ... userData.getData(),
+        const humidity = userData.humidity
+        if (humidity > 1) {
+            const updatedData : Data= {
+                ... userData,
                 'humidity': humidity-1
             }
 
-            userData.setData(updatedData)
-            console.log(userData.getData())
+            updateData(updatedData)
         }
     }
 
     useEffect(() => {
-        const humidity = userData.getData().humidity
-        if (humidity > 0) {
+        const humidity = userData.humidity
+        if (humidity > 1) {
             setCanClick(true)
         } else {
             setCanClick(false)
         }
-    })
+    }, [setCanClick, userData])
 
 
     return(
         <div>
             {canClick
-                ? <ButtonUnstyled onClick={handleMinusHumidity}>Humidifier</ButtonUnstyled>
-                : <ButtonUnstyled onClick={handleMinusHumidity} disabled>Humidifier</ButtonUnstyled>
+                ? <ButtonUnstyled onClick={handleMinusHumidity}>Dehumidifier</ButtonUnstyled>
+                : <ButtonUnstyled onClick={handleMinusHumidity} disabled>Dehumidifier</ButtonUnstyled>
             }
         </div>
     )

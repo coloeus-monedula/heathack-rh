@@ -1,9 +1,15 @@
-//calculates relative humidity, as well as a function for a humidity cap
-
+//calculates relative humidity, where R.H = vapour density aka 'humidity' / saturated vapour density aka. 'maxHumidity'
+//returns as percentage rounded to nearest int
 export const calculateRelHumidity = (temp: number, humidity: number) : number => {
-    return 0
+    const maxHumidity = calculateMaxHumidity(temp)
+    console.log(maxHumidity)
+    //max rel.humidity is 100%
+    //NOTE: may need to adjust for dew point
+    return Math.min(Math.round((humidity/maxHumidity)*100), 100)
 }
 
-export const calculateMaxHumidity = (temp: number, humidity: number): number => {
-    return 10
+//returns a mock saturated vapour density
+export const calculateMaxHumidity = (temp: number): number => {
+    //will range from 3 to 8
+    return (temp/5) + 2
 }

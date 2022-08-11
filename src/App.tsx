@@ -1,20 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Reset } from './components/Reset';
-import { Data } from './util/userData';
-import { Temperature } from './components/TempDial';
+import { Temperature } from './components/Temperature';
+import { Humidifier } from './components/Humidifier';
+import { Dehumidifer } from './components/Dehumidifer';
+import { RelHumidity } from './components/RelHumidity';
 
 
 export type Props = {
   userData: Data
+  updateData: React.Dispatch<React.SetStateAction<Data>>
+  defaults: {
+    maxHumidity: number,
+    relHumidity: number,
+    tempKnobIndex: number,
+    data: {
+      temp: number,
+      humidity: number
+    }
+  }
+  reset?: boolean,
+  setReset?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+export type Data = {
+  temp: number;
+  humidity: number;
+
+}
+
+
 function App() {
-  const localData = new Data({
-    temp: 20,
-    humidity: 15
-  })
+  const defaults = {
+    maxHumidity:3,
+    relHumidity:33,
+    tempKnobIndex: 3,
+    data: {
+      temp: 15,
+      humidity: 1
+    }
+  }
+    
+    const [localData, setLocalData] = useState<Data>({
+      temp: 15,
+      humidity: 1
+    })
+
+    const [reset, setReset] = useState<boolean>(false)
+
 
   return (
     <div className="App">
@@ -34,8 +68,11 @@ function App() {
         
       </header> */}
 
-      <Reset userData={localData} ></Reset>
-      <Temperature userData={localData}></Temperature>
+      <Reset userData={localData} updateData={setLocalData} setReset={setReset} reset = {reset} defaults = {defaults}></Reset>
+      <Temperature userData={localData} updateData={setLocalData} reset={reset} setReset={setReset} defaults = {defaults}></Temperature>
+      <Humidifier userData={localData} updateData={setLocalData} defaults = {defaults}></Humidifier>
+      <Dehumidifer userData={localData} updateData={setLocalData} defaults = {defaults}></Dehumidifer>
+      <RelHumidity userData={localData} updateData={setLocalData} defaults = {defaults}></RelHumidity>
     </div>
   );
 }

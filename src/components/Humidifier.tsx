@@ -1,42 +1,40 @@
 import { ButtonUnstyled } from "@mui/base";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Props } from "../App";
+import { Data, Props } from "../App";
 import { calculateMaxHumidity } from "../util/calculations";
-import { userData } from "../util/userData";
 
-export function Humidifier({userData} : Props) {
+export function Humidifier({userData, updateData, defaults} : Props) {
     //TODO: change this to something more legit
-    const [maxHumidity, setMaxHumidity] = useState<number>(10)
+    const [maxHumidity, setMaxHumidity] = useState<number>(defaults.maxHumidity)
     const [canClick, setCanClick] = useState<boolean>(true)
 
     //TODO: maybe vary incrementation
     const handleAddHumidity = () : void => {
-        const humidity = userData.getData().humidity
+        const humidity = userData.humidity
         if (humidity < maxHumidity) {
-            const updatedData : userData = {
-                ... userData.getData(),
+            const updatedData : Data = {
+                ... userData,
                 'humidity': humidity+1
             }
 
-            userData.setData(updatedData)
-            console.log(userData.getData())
+            updateData(updatedData)
         }
     }
 
     //auto updates maxHumidity and whether or not button can be clicked
     useEffect(() => {
-        const temp = userData.getData().temp
-        const humidity = userData.getData().humidity
-        setMaxHumidity(calculateMaxHumidity(temp, humidity))
+        const temp = userData.temp
+        const humidity = userData.humidity
+        setMaxHumidity(calculateMaxHumidity(temp))
 
-        if (humidity > maxHumidity) {
+        if (humidity >= maxHumidity) {
             setCanClick(false)
         } else {
             setCanClick(true)
         }
 
-    }, [userData.getData()])
+    },[maxHumidity, userData])
 
 
     return(
