@@ -6,6 +6,7 @@ import { Temperature } from './components/Temperature';
 import { Humidifier } from './components/Humidifier';
 import { Dehumidifer } from './components/Dehumidifer';
 import { RelHumidity } from './components/RelHumidity';
+import { Box } from '@mui/joy';
 
 
 export type Props = {
@@ -14,14 +15,12 @@ export type Props = {
   defaults: {
     maxHumidity: number,
     relHumidity: number,
-    tempKnobIndex: number,
+    temp: number,
     data: {
       temp: number,
       humidity: number
     }
   }
-  reset?: boolean,
-  setReset?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export type Data = {
@@ -35,7 +34,7 @@ function App() {
   const defaults = {
     maxHumidity:3,
     relHumidity:33,
-    tempKnobIndex: 3,
+    temp: 15,
     data: {
       temp: 15,
       humidity: 1
@@ -68,11 +67,13 @@ function App() {
         
       </header> */}
 
-      <Reset userData={localData} updateData={setLocalData} setReset={setReset} reset = {reset} defaults = {defaults}></Reset>
-      <Temperature userData={localData} updateData={setLocalData} reset={reset} setReset={setReset} defaults = {defaults}></Temperature>
-      <Humidifier userData={localData} updateData={setLocalData} defaults = {defaults}></Humidifier>
-      <Dehumidifer userData={localData} updateData={setLocalData} defaults = {defaults}></Dehumidifer>
+      <Reset userData={localData} updateData={setLocalData} defaults = {defaults}></Reset>
+      <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+        <Humidifier userData={localData} updateData={setLocalData} defaults = {defaults}></Humidifier>
+        <Dehumidifer userData={localData} updateData={setLocalData} defaults = {defaults}></Dehumidifer>
+      </Box>
       <RelHumidity userData={localData} updateData={setLocalData} defaults = {defaults}></RelHumidity>
+      <Temperature userData={localData} updateData={setLocalData}defaults = {defaults}></Temperature>
     </div>
   );
 }

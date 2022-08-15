@@ -1,21 +1,22 @@
-import { ButtonUnstyled } from "@mui/base";
 import { Data, Props } from "../App";
+import { Button } from "@mui/joy";
+import { CssVarsProvider } from '@mui/joy/styles';
 
 
-export function Reset({userData, updateData, defaults, setReset} : Props): JSX.Element  {
+
+export function Reset({userData, updateData, defaults} : Props): JSX.Element  {
 
 
     const handleResetData = () : void => {
         updateData(defaults.data)
-        if (setReset) {
-            setReset(true)
-            // console.log("Reset")
-        }
-
     }
 
     return (
-        <ButtonUnstyled onClick={handleResetData}>Reset</ButtonUnstyled>
+        <CssVarsProvider>
+            <Button 
+            onClick={handleResetData} 
+            >Reset</Button>
+        </CssVarsProvider>
     )
 }
 

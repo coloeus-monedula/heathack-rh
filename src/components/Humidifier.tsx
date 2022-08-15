@@ -1,5 +1,6 @@
-import { ButtonUnstyled } from "@mui/base";
 import { useEffect } from "react";
+import { Button } from "@mui/joy";
+import { CssVarsProvider } from '@mui/joy/styles';
 import { useState } from "react";
 import { Data, Props } from "../App";
 import { calculateMaxHumidity } from "../util/calculations";
@@ -38,12 +39,12 @@ export function Humidifier({userData, updateData, defaults} : Props) {
 
 
     return(
-        <div>
+        <CssVarsProvider>
             {canClick
-                ? <ButtonUnstyled onClick={handleAddHumidity}>Humidifier</ButtonUnstyled>
-                : <ButtonUnstyled onClick={handleAddHumidity} disabled>Humidifier</ButtonUnstyled>
+                ? <Button onClick={handleAddHumidity} variant="soft">Humidifier</Button>
+                : <Button onClick={handleAddHumidity} disabled variant="soft">Humidifier</Button>
             }
-        </div>
+        </CssVarsProvider>
     )
     
 }
