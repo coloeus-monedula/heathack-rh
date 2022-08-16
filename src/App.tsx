@@ -7,6 +7,7 @@ import { Humidifier } from './components/Humidifier';
 import { Dehumidifer } from './components/Dehumidifer';
 import { RelHumidity } from './components/RelHumidity';
 import { Box } from '@mui/joy';
+import { Outcomes } from './components/Outcomes';
 
 
 export type Props = {
@@ -18,7 +19,8 @@ export type Props = {
     temp: number,
     data: {
       temp: number,
-      humidity: number
+      humidity: number,
+      relHumidity: number,
     }
   }
 }
@@ -26,28 +28,24 @@ export type Props = {
 export type Data = {
   temp: number;
   humidity: number;
+  relHumidity: number
 
 }
 
 
 function App() {
   const defaults = {
-    maxHumidity:3,
+    maxHumidity:4,
     relHumidity:33,
     temp: 15,
     data: {
       temp: 15,
-      humidity: 1
+      humidity: 2,
+      relHumidity: 20
     }
   }
     
-    const [localData, setLocalData] = useState<Data>({
-      temp: 15,
-      humidity: 1
-    })
-
-    const [reset, setReset] = useState<boolean>(false)
-
+    const [localData, setLocalData] = useState<Data>(defaults.data)
 
   return (
     <div className="App">
@@ -67,13 +65,14 @@ function App() {
         
       </header> */}
 
-      <Reset userData={localData} updateData={setLocalData} defaults = {defaults}></Reset>
+      <RelHumidity userData={localData} updateData={setLocalData} defaults = {defaults}></RelHumidity>
       <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
         <Humidifier userData={localData} updateData={setLocalData} defaults = {defaults}></Humidifier>
         <Dehumidifer userData={localData} updateData={setLocalData} defaults = {defaults}></Dehumidifer>
+        <Reset userData={localData} updateData={setLocalData} defaults = {defaults}></Reset>
       </Box>
-      <RelHumidity userData={localData} updateData={setLocalData} defaults = {defaults}></RelHumidity>
       <Temperature userData={localData} updateData={setLocalData}defaults = {defaults}></Temperature>
+      <Outcomes userData={localData} updateData={setLocalData}defaults = {defaults}></Outcomes>
     </div>
   );
 }

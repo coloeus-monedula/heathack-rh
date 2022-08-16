@@ -1,7 +1,7 @@
 import { ConnectingAirportsOutlined } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import ReactSpeedometer from "react-d3-speedometer";
-import { Props } from "../App";
+import { Data, Props } from "../App";
 import { calculateRelHumidity } from "../util/calculations";
 
 export function RelHumidity({userData, updateData}: Props){
@@ -10,7 +10,13 @@ export function RelHumidity({userData, updateData}: Props){
     useEffect(() =>{
         const newRelHumidity = calculateRelHumidity(userData.temp, userData.humidity)
         setRelHumidity(newRelHumidity)
-    },[userData])
+        const updatedData: Data = {
+            ...userData,
+            relHumidity: newRelHumidity
+        }
+
+        updateData(updatedData)
+    },[userData, updateData])
 
     return (
         <ReactSpeedometer

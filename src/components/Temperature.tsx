@@ -12,7 +12,7 @@ export function Temperature({userData, updateData, defaults}: Props) {
     const handleTempChange = (event: Event|React.SyntheticEvent<Element, Event>, value:number|number[]) : void => {
         if (!Array.isArray(value)){
             const updatedData: Data = {
-                ... userData,
+                ...userData,
                 "temp": value
             }
             updateData(updatedData)
