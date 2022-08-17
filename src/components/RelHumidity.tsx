@@ -1,4 +1,4 @@
-import { ConnectingAirportsOutlined } from "@mui/icons-material";
+import { CssVarsProvider, Box, Typography } from "@mui/joy";
 import { useEffect, useState } from "react";
 import ReactSpeedometer from "react-d3-speedometer";
 import { Data, Props } from "../App";
@@ -19,15 +19,24 @@ export function RelHumidity({userData, updateData}: Props){
     },[userData, updateData])
 
     return (
-        <ReactSpeedometer
-        minValue={0}
-        maxValue={100}
-        value={relHumidity}
-        startColor="#abdbe3"
-        endColor="#154c79"
-        segments={1000}
-        maxSegmentLabels={5}
-        currentValueText= "${value}%"
-        />
+        <CssVarsProvider>
+            <Box sx={{position:'relative', width:300, margin:'10px', display: 'span'}}>
+                <Typography level="h5">
+                    Relative Humidity
+                </Typography>
+                <ReactSpeedometer
+                minValue={0}
+                maxValue={100}
+                value={relHumidity}
+                startColor="#abdbe3"
+                endColor="#154c79"
+                segments={1000}
+                maxSegmentLabels={5}
+                currentValueText= "${value}%"
+                height={200}
+                />
+            </Box>
+
+        </CssVarsProvider>
     )
 }

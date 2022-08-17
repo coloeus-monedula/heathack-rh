@@ -2,7 +2,6 @@
 //returns as percentage rounded to nearest int
 export const calculateRelHumidity = (temp: number, humidity: number) : number => {
     const maxHumidity = calculateMaxHumidity(temp)
-    console.log(maxHumidity)
     //max rel.humidity is 100%
     //NOTE: may need to adjust for dew point
     return Math.min(Math.round((humidity/maxHumidity)*100), 100)

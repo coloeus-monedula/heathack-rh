@@ -1,5 +1,21 @@
 .App {
   text-align: center;
+  display: grid; 
+  grid-template-columns: 1.2fr 0.8fr; 
+  grid-template-rows: 1fr 1fr; 
+  grid-template-areas: 
+  "Outcome ."
+  "Outcome ."; 
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  margin: auto;
+}
+
+/* https://stackoverflow.com/questions/68958392/center-a-whole-css-grid-with-respect-to-the-whole-page */
+.Outcome {
+  grid-area: Outcome;
 }
 
 .App-logo {

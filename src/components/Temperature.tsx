@@ -21,7 +21,6 @@ export function Temperature({userData, updateData, defaults}: Props) {
    
 
     useEffect(() => {
-        console.log(userData)
         const temp = userData.temp
         const newIndex = temp
         setIndex(newIndex)
@@ -58,7 +57,7 @@ export function Temperature({userData, updateData, defaults}: Props) {
     return (
         <CssVarsProvider>
 
-            <Box sx={{ height: 200, mx:'auto' }}>
+            <Box sx={{ minHeight: 200, width: 100, position:'relative', margin:'10px 10px 10px 0px' }}>
                 <Slider
                 aria-label='Temperature'
                 getAriaValueText={valueText}

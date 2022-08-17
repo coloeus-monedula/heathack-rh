@@ -3,6 +3,7 @@ import { Sheet } from '@mui/joy';
 import { Box } from '@mui/system';
 import { Props } from '../App';
 import { useEffect, useState } from 'react';
+import '../App.css'
 
 export function Outcomes({userData}:Props): JSX.Element {
     //0 is good, -1 is uncomfortable, -2 very uncomfortable
@@ -44,10 +45,10 @@ export function Outcomes({userData}:Props): JSX.Element {
 
     return (
         //these will be svgs at some point
-        //To add: explanation Text
+        //To add: explanation TextclassName="Outcome" 
         //have something for temp and something for humidity/dryness
         <CssVarsProvider>
-            <Sheet variant='outlined' >
+            <Sheet className="Outcome"  variant='soft' sx={{width:'90%', height:'90%',padding: 'auto', margin:'10px' }}>
                 <Box id='Comfort'>{comfort<0 && outputDiscomfortReason()}</Box>
                 <Box id='Building'>{!isBuildingGood && `Building is at risk of damage.`}</Box>
                 <Box id='Window'>{reachedDewpoint && `Dewpoint has been reached. This is very bad!`}</Box>
