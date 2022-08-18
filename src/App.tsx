@@ -52,13 +52,13 @@ function App() {
 
       <RelHumidity userData={localData} updateData={setLocalData} defaults = {defaults}></RelHumidity>
       <Outcomes userData={localData} updateData={setLocalData}defaults = {defaults}></Outcomes>
-      <Sheet variant="outlined" sx={{display: 'inline-flex', minHeight:'220px', margin:'10px', justifyContent:'space-around', padding:'10px', width: 300}}>
+      <Sheet variant="outlined" sx={{display: 'inline-flex', minHeight:'220px', margin:'10px', justifyContent:'space-around', padding:'10px', width: 300, alignSelf:'start'}}>
         <Box sx={{ display: 'flex', gap: 2, flexDirection:'column', maxWidth:"100px", margin: '0px 20px', justifyContent:'center' }}>
           <Humidifier userData={localData} updateData={setLocalData} defaults = {defaults}></Humidifier>
           <Dehumidifer userData={localData} updateData={setLocalData} defaults = {defaults}></Dehumidifer>
           <Reset userData={localData} updateData={setLocalData} defaults = {defaults}></Reset>
         </Box>
-      <Temperature userData={localData} updateData={setLocalData}defaults = {defaults}></Temperature>
+        <Temperature userData={localData} updateData={setLocalData}defaults = {defaults}></Temperature>
       </Sheet>
     </Grid>
   );

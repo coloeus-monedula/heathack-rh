@@ -9,6 +9,16 @@ export const calculateRelHumidity = (temp: number, humidity: number) : number =>
 
 //returns a mock saturated vapour density
 export const calculateMaxHumidity = (temp: number): number => {
-    //will range from 3 to 8
-    return (temp/5) + 2
+    //so higher the temp, the comparatively higher the mock saturated vapour density
+    return Math.round(2*(temp/5))  
+}
+
+//if the temp is high - holds a lot of humidity, but then is dropped down - humidity condenses
+export const calculateCondensation = (temp:number,humidity: number): number => {
+    const maxHumidity = calculateMaxHumidity(temp)
+    if (humidity > maxHumidity) {
+        return humidity - maxHumidity
+    } else {
+        return 0
+    }
 }

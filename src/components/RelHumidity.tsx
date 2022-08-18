@@ -4,8 +4,9 @@ import ReactSpeedometer from "react-d3-speedometer";
 import { Data, Props } from "../App";
 import { calculateRelHumidity } from "../util/calculations";
 
-export function RelHumidity({userData, updateData}: Props){
-    const [relHumidity, setRelHumidity] = useState<number>(33)
+export function RelHumidity({userData, updateData, defaults}: Props){
+    //this number gets overriden pretty much immediately but still good to keep
+    const [relHumidity, setRelHumidity] = useState<number>(defaults.relHumidity)
 
     useEffect(() =>{
         const newRelHumidity = calculateRelHumidity(userData.temp, userData.humidity)
@@ -20,7 +21,7 @@ export function RelHumidity({userData, updateData}: Props){
 
     return (
         <CssVarsProvider>
-            <Box sx={{position:'relative', width:300, margin:'10px', display: 'span'}}>
+            <Box sx={{position:'relative', width:300, margin:'10px', display: 'span', alignSelf:'end'}}>
                 <Typography level="h5">
                     Relative Humidity
                 </Typography>
