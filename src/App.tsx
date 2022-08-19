@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Reset } from './components/Reset';
-import { Temperature } from './components/Temperature';
+import { Thermostat } from './components/Thermostat';
 import { Humidifier } from './components/Humidifier';
 import { Dehumidifer } from './components/Dehumidifer';
 import { RelHumidity } from './components/RelHumidity';
 import { Box, Grid, Sheet } from '@mui/joy';
 import { Outcomes } from './components/Outcomes';
+import Heater from './components/Heater';
 
 
 export type Props = {
@@ -21,7 +22,8 @@ export type Props = {
       temp: number,
       humidity: number,
       relHumidity: number,
-      condensation: number
+      condensation: number,
+      on: boolean
     }
   }
 }
@@ -30,7 +32,8 @@ export type Data = {
   temp: number;
   humidity: number;
   relHumidity: number,
-  condensation: number
+  condensation: number,
+  on:boolean,
 
 }
 
@@ -44,7 +47,8 @@ function App() {
       temp: 15,
       humidity: 3,
       relHumidity: 20,
-      condensation: 0
+      condensation: 0,
+      on: false,
     }
   }
     
@@ -61,7 +65,8 @@ function App() {
           <Dehumidifer userData={localData} updateData={setLocalData} defaults = {defaults}></Dehumidifer>
           <Reset userData={localData} updateData={setLocalData} defaults = {defaults}></Reset>
         </Box>
-        <Temperature userData={localData} updateData={setLocalData}defaults = {defaults}></Temperature>
+        <Heater userData={localData} updateData={setLocalData} defaults={defaults}/>
+        <Thermostat userData={localData} updateData={setLocalData}defaults = {defaults}></Thermostat>
       </Sheet>
     </Grid>
   );

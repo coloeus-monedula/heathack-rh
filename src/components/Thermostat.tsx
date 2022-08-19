@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { Data, Props } from "../App";
 import { calculateCondensation } from '../util/calculations';
 
-export function Temperature({userData, updateData, defaults}: Props) {
+export function Thermostat({userData, updateData, defaults}: Props) {
     //for (re)setting temp knob
     const [index, setIndex] = useState<number>(defaults.temp)
 
@@ -32,7 +32,8 @@ export function Temperature({userData, updateData, defaults}: Props) {
             "relHumidity": userData.relHumidity,
             "condensation": condensation,
             "humidity": newHumidity,
-            "temp": value
+            "temp": value,
+            "on":userData.on
         }
         updateData(updatedData)
       }
