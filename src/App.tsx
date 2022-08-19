@@ -21,6 +21,7 @@ export type Props = {
       temp: number,
       humidity: number,
       relHumidity: number,
+      condensation: number
     }
   }
 }
@@ -28,7 +29,8 @@ export type Props = {
 export type Data = {
   temp: number;
   humidity: number;
-  relHumidity: number
+  relHumidity: number,
+  condensation: number
 
 }
 
@@ -41,7 +43,8 @@ function App() {
     data: {
       temp: 15,
       humidity: 2,
-      relHumidity: 20
+      relHumidity: 20,
+      condensation: 0
     }
   }
     

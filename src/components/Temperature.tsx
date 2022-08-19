@@ -4,20 +4,40 @@ import { CssVarsProvider } from '@mui/joy/styles';
 
 import React, { useEffect, useState } from 'react';
 import { Data, Props } from "../App";
+import { calculateCondensation } from '../util/calculations';
 
 export function Temperature({userData, updateData, defaults}: Props) {
     //for (re)setting temp knob
     const [index, setIndex] = useState<number>(defaults.temp)
 
-    const handleTempChange = (event: Event|React.SyntheticEvent<Element, Event>, value:number|number[]) : void => {
+    const handleTempChange = (event: Event, value:number|number[]) : void => {
         if (!Array.isArray(value)){
-          console.log(userData)
+
             const updatedData: Data = {
-                ...userData,
-                "temp": value
+              ...userData,
+              "temp": value
             }
             updateData(updatedData)
         }
+    }
+
+    const handleCondensation = (event: Event | React.SyntheticEvent<Element, Event>, value: number | number[]) => {
+      const condensation = calculateCondensation(userData.temp, userData.humidity)
+      console.log("committed")
+      //if condensation is more than 0
+      const newHumidity = userData.humidity - condensation
+      if (!Array.isArray(value)){
+
+        const updatedData: Data = {
+            "relHumidity": userData.relHumidity,
+            "condensation": condensation,
+            "humidity": newHumidity,
+            "temp": value
+        }
+        updateData(updatedData)
+      }
+    
+      
     }
    
 
@@ -65,7 +85,7 @@ export function Temperature({userData, updateData, defaults}: Props) {
                 defaultValue={defaults.temp}
                 min={5}
                 max={30}
-                step={5}
+                step={2}
                 name="Temperature"
                 marks={marks}
                 size = "lg"
@@ -73,6 +93,7 @@ export function Temperature({userData, updateData, defaults}: Props) {
                 orientation="vertical"   
                 valueLabelFormat="°C" 
                 onChange={handleTempChange}
+                onChangeCommitted={handleCondensation}
                 value={index}
                 />
             </Box>
