@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Reset } from './components/Reset';
-import { Thermostat } from './components/Thermostat';
+import Thermostat from './components/Thermostat';
 import { Humidifier } from './components/Humidifier';
 import { Dehumidifer } from './components/Dehumidifer';
 import { RelHumidity } from './components/RelHumidity';
@@ -58,6 +58,7 @@ function App() {
     <Grid className="App">
 
       <RelHumidity userData={localData} updateData={setLocalData} defaults = {defaults}></RelHumidity>
+      <Thermostat userData={localData} updateData={setLocalData}defaults = {defaults}></Thermostat>
       <Outcomes userData={localData} updateData={setLocalData}defaults = {defaults}></Outcomes>
       <Sheet variant="outlined" sx={{display: 'inline-flex', minHeight:'220px', margin:'10px', justifyContent:'space-around', padding:'10px', width: 300, alignSelf:'start'}}>
         <Box sx={{ display: 'flex', gap: 2, flexDirection:'column', maxWidth:"100px", margin: '0px 20px', justifyContent:'center' }}>
@@ -66,7 +67,6 @@ function App() {
           <Reset userData={localData} updateData={setLocalData} defaults = {defaults}></Reset>
         </Box>
         <Heater userData={localData} updateData={setLocalData} defaults={defaults}/>
-        <Thermostat userData={localData} updateData={setLocalData}defaults = {defaults}></Thermostat>
       </Sheet>
     </Grid>
   );

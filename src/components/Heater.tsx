@@ -50,6 +50,8 @@ export default function Heater({userData,updateData}:Props) {
         updateData(updated)
     }
 
+    //TODO: heater func should turn on an effect that makes temp rise
+
     return (
         <CssVarsProvider>
             <ToggleButton
