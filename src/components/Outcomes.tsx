@@ -4,16 +4,13 @@ import { Box } from '@mui/system';
 import { Data, Props } from '../App';
 import { useEffect, useState } from 'react';
 import '../App.css'
-import { calculateCondensation } from '../util/calculations';
 
-export function Outcomes({userData, updateData, defaults}:Props): JSX.Element {
+export function Outcomes({userData, updateData}:Props): JSX.Element {
     //0 is good, -1 is uncomfortable, -2 very uncomfortable
     const [comfort, setComfort] = useState<number>(0)
     const [isBuildingGood, setIsBuildingGood] = useState<boolean>(true)
     const [reachedDewpoint, setReachedDewpoint] = useState<boolean>(false)
-    const [hasCondensation, setHasCondensation] = useState<boolean>(true)
-    const [condensedUnits, setCondensedUnits] = useState<number>(0)
-    const [humidityUnits, setHumidityUnits] = useState<number>(defaults.data.humidity)
+    const [hasCondensation, setHasCondensation] = useState<boolean>(false)
 
 
     const outputDiscomfortReason = (): String => {
@@ -46,33 +43,13 @@ export function Outcomes({userData, updateData, defaults}:Props): JSX.Element {
             setComfort(0)
         }
 
-        let newHumidity = userData.humidity
         const condensation = userData.condensation
-        // if ( condensation > 0) {
-        //     setHasCondensation(true)
-        // } else {
-        // }
-        setCondensedUnits(condensation)
-        // if (condensed > 0) {
-        //     newHumidity -= condensed
-        //     const updatedData: Data = {
-        //         "relHumidity": userData.relHumidity,
-        //         "temp": userData.temp,
-        //         "humidity": newHumidity
-        //     }
+        if ( condensation > 0) {
+            setHasCondensation(true)
+        } else {
+            setHasCondensation(false)
+        }
 
-        //     console.log(updatedData)
-            
-        //     setHasCondensation(true)
-        //     setCondensedUnits(condensed)
-        //     updateData(updatedData)
-
-        // } else {
-        //     setHasCondensation(false)
-        //     setCondensedUnits(0)
-        // }
-
-        setHumidityUnits(newHumidity)
     }, [userData,updateData])
 
 
@@ -84,7 +61,7 @@ export function Outcomes({userData, updateData, defaults}:Props): JSX.Element {
             <Sheet className="Outcome"  variant='soft' sx={
                 {width:'90%', height:'90%',padding: 'auto', margin:'10px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', justifySelf:'end' }
                 }>
-                <Box id='HumidityInfo'>The air currently "holds" {userData.humidity} "unit(s)" of humidity. {hasCondensation && `${condensedUnits} "unit(s)" of humidity have become condensed due to lower temperatures.`}</Box>
+                <Box id='HumidityInfo'>The air currently "holds" {userData.humidity} "unit(s)" of humidity. {hasCondensation && `${userData.condensation} "unit(s)" of humidity have become condensed due to lower temperatures.`}</Box>
                 <Box id='Comfort'>{comfort<0? outputDiscomfortReason(): `Person feels comfortable.`}</Box>
                 <Box id='Building'>{!isBuildingGood && `Building is at risk of damage.`}</Box>
                 <Box id='Window'>{reachedDewpoint && `Dewpoint has been reached. This is very bad!`}</Box>

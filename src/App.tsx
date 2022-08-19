@@ -37,12 +37,12 @@ export type Data = {
 
 function App() {
   const defaults = {
-    maxHumidity:4,
+    maxHumidity:6,
     relHumidity:33,
     temp: 15,
     data: {
       temp: 15,
-      humidity: 2,
+      humidity: 3,
       relHumidity: 20,
       condensation: 0
     }
