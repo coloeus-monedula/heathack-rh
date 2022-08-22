@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Data, Props } from "../App"
 import { CssVarsProvider, styled } from '@mui/joy/styles';
+import { calculateCondensation, calculateMaxHumidity } from "../util/calculations";
 
 //ToggleButton code and styling taken from
 //https://mui.com/joy-ui/customization/approaches/#reusable-component
@@ -55,26 +56,41 @@ export default function Heater({userData,updateData, defaults}:Props) {
 
     useEffect(() => {
       let temp:number
+      let humidity:number = userData.humidity
+      let condensation: number = userData.condensation
+
       if (isOn) {
         temp = userData.temp>= 30? 30 : userData.temp + 1
 
         }
        else {
         temp = userData.temp<= 5? 5 : userData.temp - 1
+        //condensation only happens when temp decreases
+        condensation = calculateCondensation(userData.temp, userData.humidity)
+        if (condensation > 0) {
+          const maxHumidity = calculateMaxHumidity(temp)
+          humidity -= condensation
+          //due to the dummy formulas and how it rounds
+          //sometimes can still have humidity > maxHumidity 
+          //so this just sets it to maxHumidity
+          if (humidity > maxHumidity ) {
+            humidity = calculateMaxHumidity(temp)
+          }
+        }
+
       }
 
       const timer = setInterval(() => {
         const updated = {
           "on": userData.on,
-          "humidity": userData.humidity,
-          "condensation": userData.condensation,
+          "humidity": humidity,
+          "condensation": condensation,
           "relHumidity": userData.relHumidity,
           "temp":temp
         }
 
         updateData(updated)
 
-        console.log(temp)
       }, 1700);
       return () => {
         clearInterval(timer);

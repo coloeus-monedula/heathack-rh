@@ -1,7 +1,7 @@
 import { CssVarsProvider } from '@mui/joy/styles';
 import { Sheet } from '@mui/joy';
 import { Box } from '@mui/system';
-import { Data, Props } from '../App';
+import { Props } from '../App';
 import { useEffect, useState } from 'react';
 import '../App.css'
 import { calculateMaxHumidity } from '../util/calculations';
@@ -52,7 +52,7 @@ export function Outcomes({userData, updateData}:Props): JSX.Element {
     const outputHumidity = () => {
         const humidity = userData.humidity
         const maxHumidity = calculateMaxHumidity(userData.temp)
-        if (humidity === maxHumidity) {
+        if (humidity === maxHumidity || humidity > maxHumidity) {
             return `the maximum amount`
         } else if (humidity >= HUMIDITY_LOTS ) {
             return `lots`
@@ -105,7 +105,7 @@ export function Outcomes({userData, updateData}:Props): JSX.Element {
             <Sheet className="Outcome"  variant='soft' sx={
                 {width:'90%', height:'90%',padding: 'auto', margin:'10px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', justifySelf:'end' }
                 }>
-                <Box id='HumidityInfo'>The air currently "holds" {outputHumidity()} of humidity. {hasCondensation && `${userData.condensation} "unit(s)" of humidity have become condensed due to lower temperatures.`}</Box>
+                <Box id='HumidityInfo'>The air currently "holds" {outputHumidity()} of humidity. {hasCondensation && `Due to lower temperatures and the air being unable to "hold" as much humidity, condensation is forming.`}</Box>
                 <Box id='Comfort'>{comfort<0? outputDiscomfortReason(): `Person feels comfortable.`}</Box>
                 <Box id='Building'>{!isBuildingGood && `Building is at risk of damage.`}</Box>
                 <Box id='Window'>{reachedDewpoint && `Dewpoint has been reached. This is very bad!`}</Box>
