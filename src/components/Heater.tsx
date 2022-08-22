@@ -35,8 +35,9 @@ const ToggleButton = styled('button')(
   );
   
 
-export default function Heater({userData,updateData}:Props) {
-    const [isOn, setIsOn] = useState<boolean>(false)
+export default function Heater({userData,updateData, defaults}:Props) {
+    const [isOn, setIsOn] = useState<boolean>(defaults.data.on)
+
 
     const toggleHeating = () => {
         const opposite = !isOn
@@ -48,9 +49,39 @@ export default function Heater({userData,updateData}:Props) {
         }
 
         updateData(updated)
+
     }
 
-    //TODO: heater func should turn on an effect that makes temp rise
+
+    useEffect(() => {
+      let temp:number
+      if (isOn) {
+        temp = userData.temp>= 30? 30 : userData.temp + 1
+
+        }
+       else {
+        temp = userData.temp<= 5? 5 : userData.temp - 1
+      }
+
+      const timer = setInterval(() => {
+        const updated = {
+          "on": userData.on,
+          "humidity": userData.humidity,
+          "condensation": userData.condensation,
+          "relHumidity": userData.relHumidity,
+          "temp":temp
+        }
+
+        updateData(updated)
+
+        console.log(temp)
+      }, 1700);
+      return () => {
+        clearInterval(timer);
+      }
+    }, [ isOn, userData.humidity, userData.condensation, userData.relHumidity, userData.on, userData.temp, updateData])
+    //dependencies written out individually because adding userData as a dep automatically goes to clearInterval
+    //without running the timer
 
     return (
         <CssVarsProvider>
