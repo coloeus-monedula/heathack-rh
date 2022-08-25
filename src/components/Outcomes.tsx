@@ -58,6 +58,7 @@ export function Outcomes({userData, updateData}:Props): JSX.Element {
         if (temp === "good" && relHumidity !== "good" ) {
             return `Temperature is good, but I still feel ${discomfortDegree} uncomfortable because it is too ${humidity}.`
         } else if (relHumidity === "good" && temp !=="good") {
+            //TODO: ask if this one is needed
             return `I feel comfortable, but the temperature is ${temp}.`
         }
         else {
@@ -154,13 +155,12 @@ export function Outcomes({userData, updateData}:Props): JSX.Element {
             setIsBuildingGood(true)
         }
 
-        //TODO: need to fix for when dewpoint 100% and it still says "somewhat"
-        if (userData.temp > TEMP_HOT || userData.temp < TEMP_COLD) {
-            setComfort(-1)
-        } else if (relHumidity > 75 || relHumidity < 35) {
+        if (relHumidity > 75 || relHumidity < 35) {
             setComfort(-2)
         } else if (relHumidity > 65 || relHumidity < 45) {
-            setComfort(-1)
+            setComfort(-1) 
+        } else if (userData.temp > TEMP_HOT || userData.temp < TEMP_COLD) {
+            setComfort(-1) 
         } else if (relHumidity <=65 && relHumidity >=45) {
             setComfort(0)
         } 
