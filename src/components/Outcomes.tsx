@@ -135,7 +135,7 @@ export function Outcomes({userData, updateData}:Props): JSX.Element {
             personStatus = comfortable
         }
 
-        return <Box id="Images" sx ={{maxHeight: "70%",display:'flex', justifyContent:'space-evenly', marginTop:'10px', flexWrap:'wrap', alignItems:'center'}}>
+        return <Box id="Images" sx ={{maxHeight: "70%",display:'flex', justifyContent:'space-evenly', marginTop:'10px', marginBottom:'10px',flexWrap:'wrap', alignItems:'center'}}>
                  <img src={buildingStatus} style={{width: '50%', height:'50%'}} alt="building health"/> <img src={personStatus} alt ="human comfort"/> <img src={windowStatus} alt="window"/>
             </Box>
     }
@@ -177,18 +177,15 @@ export function Outcomes({userData, updateData}:Props): JSX.Element {
 
 
     return (
-        //these will be svgs at some point
-        //To add: explanation TextclassName="Outcome" 
-        //have something for temp and something for humidity/dryness
         <CssVarsProvider>
             <Sheet className="Outcome"  variant='soft' sx={
                 {width:'90%', height:'85%',padding: 'auto', margin:'10px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', justifySelf:'end' }
                 }>
-                <Box id='HumidityInfo'>The air currently "holds" {outputHumidity()} of humidity. {hasCondensation && `Due to lower temperatures and the air being unable to "hold" as much humidity, condensation is forming.`}</Box>
                 <Box id='Comfort'>{comfort<0? outputDiscomfortReason(): `Person feels comfortable.`}</Box>
                 <Box id='Building'>{!isBuildingGood && `Building is at risk of damage.`}</Box>
                 <Box id='Window'>{reachedDewpoint && `Dewpoint has been reached. This is very bad!`}</Box>
                 {outputImages()} 
+                <Box id='HumidityInfo'>The air currently "holds" {outputHumidity()} of humidity. {hasCondensation && `Due to lower temperatures and the air being unable to "hold" as much humidity, condensation is forming.`}</Box>
 
             </Sheet>
         </CssVarsProvider>

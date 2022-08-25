@@ -66,6 +66,8 @@ export default function Heater({userData,updateData, defaults}:Props) {
        else {
         temp = userData.temp<= 5? 5 : userData.temp - 1
         //condensation only happens when temp decreases
+        //note: due to the temperature only decreasing at 1C at a time
+        // MaxHumidity will always be reached before condensation forms
         condensation = calculateCondensation(userData.temp, userData.humidity)
         if (condensation > 0) {
           const maxHumidity = calculateMaxHumidity(temp)
