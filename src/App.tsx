@@ -57,9 +57,11 @@ function App() {
   return (
     <Grid className="App">
 
-      <RelHumidity userData={localData} updateData={setLocalData} defaults = {defaults}></RelHumidity>
-      <Thermostat userData={localData} updateData={setLocalData}defaults = {defaults}></Thermostat>
       <Outcomes userData={localData} updateData={setLocalData}defaults = {defaults}></Outcomes>
+      <Sheet sx={{display: 'inline-flex', margin: '10px', width: 400}}>
+        <RelHumidity userData={localData} updateData={setLocalData} defaults = {defaults}></RelHumidity>
+        <Thermostat userData={localData} updateData={setLocalData}defaults = {defaults}></Thermostat>
+      </Sheet>
       <Sheet variant="outlined" sx={{display: 'inline-flex', minHeight:'220px', margin:'10px', justifyContent:'space-around', padding:'10px', width: 300, alignSelf:'start'}}>
         <Box sx={{ display: 'flex', gap: 2, flexDirection:'column', maxWidth:"100px", margin: '0px 20px', justifyContent:'center' }}>
           <Humidifier userData={localData} updateData={setLocalData} defaults = {defaults}></Humidifier>
@@ -69,6 +71,7 @@ function App() {
         <Heater userData={localData} updateData={setLocalData} defaults={defaults}/>
       </Sheet>
     </Grid>
+
   );
 }
 

@@ -18,10 +18,10 @@ export default function Thermostat({userData, updateData}: Props) {
   //https://mui.com/material-ui/react-progress/#LinearWithValueLabel.tsx
   function LinearProgressWithLabel(props: LinearProgressProps & { value: number, original:number }) {
       return (
-        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection:"column-reverse" , height:400, width:400}}>
-          <Box sx={{ height: 350, width:200}}>
+        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection:"column-reverse" }}>
+          <Box sx={{ height: 200, width:200}}>
             <LinearProgress variant="determinate" {...props} sx={{
-              transform: "rotate(270deg) translate(-50%, 0)" ,
+              transform: "rotate(270deg) translate(-50%, -50%)" ,
               height:10,
               borderRadius:5,
               backgroundColor:"#d3d3d3",
