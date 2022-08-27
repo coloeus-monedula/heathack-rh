@@ -16,8 +16,6 @@ export type Props = {
   updateData: React.Dispatch<React.SetStateAction<Data>>
   defaults: {
     maxHumidity: number,
-    relHumidity: number,
-    temp: number,
     data: {
       temp: number,
       humidity: number,
@@ -41,12 +39,10 @@ export type Data = {
 function App() {
   const defaults = {
     maxHumidity:6,
-    relHumidity:33,
-    temp: 15,
     data: {
       temp: 15,
       humidity: 3,
-      relHumidity: 20,
+      relHumidity: 33,
       condensation: 0,
       on: false,
     }

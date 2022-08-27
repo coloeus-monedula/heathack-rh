@@ -8,7 +8,7 @@ import '../App.css'
 
 export function RelHumidity({userData, updateData, defaults}: Props){
     //this number gets overriden pretty much immediately but still good to keep
-    const [relHumidity, setRelHumidity] = useState<number>(defaults.relHumidity)
+    const [relHumidity, setRelHumidity] = useState<number>(defaults.data.relHumidity)
 
     useEffect(() =>{
         const newRelHumidity = calculateRelHumidity(userData.temp, userData.humidity)
