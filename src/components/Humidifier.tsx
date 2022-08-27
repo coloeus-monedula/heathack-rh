@@ -4,13 +4,13 @@ import { CssVarsProvider } from '@mui/joy/styles';
 import { useState } from "react";
 import { Data, Props } from "../App";
 import { calculateMaxHumidity } from "../util/calculations";
+import '../App.css'
+
 
 export function Humidifier({userData, updateData, defaults} : Props) {
-    //TODO: change this to something more legit
     const [maxHumidity, setMaxHumidity] = useState<number>(defaults.maxHumidity)
     const [canClick, setCanClick] = useState<boolean>(true)
 
-    //TODO: maybe vary incrementation
     const handleAddHumidity = () : void => {
         const humidity = userData.humidity
         if (humidity < maxHumidity) {
@@ -41,8 +41,8 @@ export function Humidifier({userData, updateData, defaults} : Props) {
     return(
         <CssVarsProvider>
             {canClick
-                ? <Button onClick={handleAddHumidity} variant="soft">Humidifier</Button>
-                : <Button onClick={handleAddHumidity} disabled variant="soft">Humidifier</Button>
+                ? <Button onClick={handleAddHumidity} variant="soft" size="lg">Humidifier</Button>
+                : <Button onClick={handleAddHumidity} disabled variant="soft" size="lg">Humidifier</Button>
             }
         </CssVarsProvider>
     )

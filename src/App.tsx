@@ -62,8 +62,8 @@ function App() {
         <RelHumidity userData={localData} updateData={setLocalData} defaults = {defaults}></RelHumidity>
         <Thermostat userData={localData} updateData={setLocalData}defaults = {defaults}></Thermostat>
       </Sheet>
-      <Sheet variant="outlined" sx={{display: 'inline-flex', minHeight:'220px', margin:'10px', justifyContent:'space-around', padding:'10px', width: 300, alignSelf:'start'}}>
-        <Box sx={{ display: 'flex', gap: 2, flexDirection:'column', maxWidth:"100px", margin: '0px 20px', justifyContent:'center' }}>
+      <Sheet variant="outlined" id="Controls">
+        <Box id="HumidityControls">
           <Humidifier userData={localData} updateData={setLocalData} defaults = {defaults}></Humidifier>
           <Dehumidifer userData={localData} updateData={setLocalData} defaults = {defaults}></Dehumidifer>
           <Reset userData={localData} updateData={setLocalData} defaults = {defaults}></Reset>

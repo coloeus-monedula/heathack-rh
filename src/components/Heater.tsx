@@ -14,7 +14,7 @@ const ToggleButton = styled('button')(
       gap: '8px',
       minHeight: 40,
       fontFamily: theme.vars.fontFamily.body,
-      fontSize: theme.vars.fontSize.md,
+      fontSize: theme.vars.fontSize.lg,
       fontWeight: theme.vars.fontWeight.md,
       alignItems: 'center',
       border: '1px solid',
@@ -106,7 +106,7 @@ export default function Heater({userData,updateData, defaults}:Props) {
             <ToggleButton
                 aria-pressed={isOn? 'true':'false'}
                 onClick={toggleHeating}
-                sx ={{width:120, height: 100}}>
+                sx ={{width:120, height: 170,alignSelf:"center"}}>
                     Heating {isOn? `On`:`Off`}
             </ToggleButton>
         </CssVarsProvider>

@@ -13,7 +13,8 @@ export const calculateMaxHumidity = (temp: number): number => {
     return Math.round(2*(temp/5))  
 }
 
-//if the temp is high - holds a lot of humidity, but then is dropped down - humidity condenses
+//occurs when temperature is high (and lots of humidity in air) but then temp decreases 
+//air no longer can hold as much humidity
 export const calculateCondensation = (temp:number,humidity: number): number => {
     const maxHumidity = calculateMaxHumidity(temp)
     if (humidity > maxHumidity) {

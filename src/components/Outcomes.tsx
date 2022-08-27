@@ -6,8 +6,6 @@ import { useEffect, useState } from 'react';
 import '../App.css'
 import { calculateMaxHumidity } from '../util/calculations';
 import comfortable from '../assets/comfortable.png'
-import okHot from '../assets/ok but hot.png'
-import okCold from '../assets/ok but cold.png'
 import uncomfortCold from '../assets/slightly uncomfortable cold.png'
 import uncomfortHot from '../assets/slightly uncomfortable hot.png'
 import uncomfort from '../assets/slightly uncomfortable.png'
@@ -57,11 +55,7 @@ export function Outcomes({userData, updateData}:Props): JSX.Element {
 
         if (temp === "good" && relHumidity !== "good" ) {
             return `Temperature is good, but I still feel ${discomfortDegree} uncomfortable because it is too ${humidity}.`
-        } else if (relHumidity === "good" && temp !=="good") {
-            //TODO: ask if this one is needed
-            return `I feel comfortable, but the temperature is ${temp}.`
-        }
-        else {
+        } else {
             return `I feel ${discomfortDegree} uncomfortable because it is too ${humidity} and ${temp}.`
         }
 
@@ -115,10 +109,6 @@ export function Outcomes({userData, updateData}:Props): JSX.Element {
 
         if (relHumidity === 0 && temp === 0 ) {
             personStatus = comfortable
-        } else if (relHumidity === 0 && temp === 1) {
-            personStatus = okHot
-        } else if (relHumidity === 0 && temp === -1) {
-            personStatus = okCold
         } else if (relHumidity === -1 && temp === 0) {
             personStatus = uncomfort
         } else if (relHumidity === -1 && temp === 1) {
@@ -132,10 +122,11 @@ export function Outcomes({userData, updateData}:Props): JSX.Element {
         } else if (relHumidity === -2 && temp === -1) {
             personStatus = vUncomfortCold
         } else {
+            // this will cover if relative humidity is good but temperatures are "too high"/"low"
             personStatus = comfortable
         }
 
-        return <Box id="Images" sx ={{maxHeight: "70%",display:'flex', justifyContent:'space-evenly', marginTop:'10px', marginBottom:'10px',flexWrap:'wrap', alignItems:'center'}}>
+        return <Box id="Images">
                  <img src={buildingStatus} style={{width: '50%', height:'50%'}} alt="building health"/> <img src={personStatus} alt ="human comfort"/> <img src={windowStatus} alt="window"/>
             </Box>
     }
@@ -159,8 +150,6 @@ export function Outcomes({userData, updateData}:Props): JSX.Element {
             setComfort(-2)
         } else if (relHumidity > 65 || relHumidity < 45) {
             setComfort(-1) 
-        } else if (userData.temp > TEMP_HOT || userData.temp < TEMP_COLD) {
-            setComfort(-1) 
         } else if (relHumidity <=65 && relHumidity >=45) {
             setComfort(0)
         } 
@@ -178,14 +167,12 @@ export function Outcomes({userData, updateData}:Props): JSX.Element {
 
     return (
         <CssVarsProvider>
-            <Sheet className="Outcome"  variant='soft' sx={
-                {width:'90%', height:'85%',padding: 'auto', margin:'10px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', justifySelf:'end' }
-                }>
-                <Box id='Comfort'>{comfort<0? outputDiscomfortReason(): `Person feels comfortable.`}</Box>
+            <Sheet id="Outcome"  variant='soft'>
+                <Box id='Comfort'>{comfort<0? outputDiscomfortReason(): `I feel comfortable.`}</Box>
                 <Box id='Building'>{!isBuildingGood && `Building is at risk of damage.`}</Box>
-                <Box id='Window'>{reachedDewpoint && `Dewpoint has been reached. This is very bad!`}</Box>
+                <Box id='Window' sx ={{marginBottom: "10px"}}>{reachedDewpoint && `Dewpoint has been reached. This is very bad!`}</Box>
                 {outputImages()} 
-                <Box id='HumidityInfo'>The air currently "holds" {outputHumidity()} of humidity. {hasCondensation && `Due to lower temperatures and the air being unable to "hold" as much humidity, condensation is forming.`}</Box>
+                <Box id='HumidityInfo' sx={{marginTop: "10px"}}>The air currently "holds" {outputHumidity()} of humidity. {hasCondensation && `Due to lower temperatures and the air being unable to "hold" as much humidity, condensation is forming.`}</Box>
 
             </Sheet>
         </CssVarsProvider>

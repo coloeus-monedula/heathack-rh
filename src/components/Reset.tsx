@@ -1,10 +1,12 @@
-import { Data, Props } from "../App";
+import { Props } from "../App";
 import { Button } from "@mui/joy";
 import { CssVarsProvider } from '@mui/joy/styles';
+import '../App.css'
 
 
 
-export function Reset({userData, updateData, defaults} : Props): JSX.Element  {
+
+export function Reset({updateData, defaults} : Props): JSX.Element  {
 
 
     const handleResetData = () : void => {
@@ -14,7 +16,7 @@ export function Reset({userData, updateData, defaults} : Props): JSX.Element  {
     return (
         <CssVarsProvider>
             <Button 
-            onClick={handleResetData} 
+            onClick={handleResetData} size="lg"
             >Reset</Button>
         </CssVarsProvider>
     )

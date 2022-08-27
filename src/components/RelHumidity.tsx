@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import ReactSpeedometer from "react-d3-speedometer";
 import { Data, Props } from "../App";
 import { calculateRelHumidity } from "../util/calculations";
+import '../App.css'
+
 
 export function RelHumidity({userData, updateData, defaults}: Props){
     //this number gets overriden pretty much immediately but still good to keep
@@ -21,8 +23,8 @@ export function RelHumidity({userData, updateData, defaults}: Props){
 
     return (
         <CssVarsProvider>
-            <Box sx={{position:'relative', width:300, margin:'10px', display: 'span', alignSelf:'end'}}>
-                <Typography level="h5">
+            <Box id="RelHumidity">
+                <Typography level="h4" sx={{textAlign:"center", width:370}}>
                     Relative Humidity
                 </Typography>
                 <ReactSpeedometer
@@ -34,7 +36,8 @@ export function RelHumidity({userData, updateData, defaults}: Props){
                 segments={1000}
                 maxSegmentLabels={5}
                 currentValueText= "${value}%"
-                height={200}
+                height={250}
+                width={370}
                 />
             </Box>
 

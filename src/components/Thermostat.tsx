@@ -19,12 +19,13 @@ export default function Thermostat({userData, updateData}: Props) {
   function LinearProgressWithLabel(props: LinearProgressProps & { value: number, original:number }) {
       return (
         <Box sx={{ display: 'flex', alignItems: 'center', flexDirection:"column-reverse" }}>
-          <Box sx={{ height: 200, width:200}}>
+          <Box sx={{ height: 200, width:300}}>
             <LinearProgress variant="determinate" {...props} sx={{
               transform: "rotate(270deg) translate(-50%, -50%)" ,
-              height:10,
+              height:15,
               borderRadius:5,
               backgroundColor:"#d3d3d3",
+              //progress bar styling
               '& .MuiLinearProgress-bar':{
                 borderRadius:5,
                 animationDuration:"1.7s"

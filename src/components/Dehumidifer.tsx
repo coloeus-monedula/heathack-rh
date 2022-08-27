@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Data, Props } from "../App"
 import { Button } from "@mui/joy";
 import { CssVarsProvider } from '@mui/joy/styles';
+import '../App.css'
 
 export function Dehumidifer({userData, updateData}: Props) {
     const [canClick, setCanClick] = useState<boolean>(true)
@@ -31,8 +32,8 @@ export function Dehumidifer({userData, updateData}: Props) {
     return(
         <CssVarsProvider>
             {canClick
-                ? <Button onClick={handleMinusHumidity} variant="soft">Dehumidifier</Button>
-                : <Button onClick={handleMinusHumidity} variant="soft" disabled>Dehumidifier</Button>
+                ? <Button onClick={handleMinusHumidity} variant="soft" size="lg">Dehumidifier</Button>
+                : <Button onClick={handleMinusHumidity} variant="soft" size="lg" disabled>Dehumidifier</Button>
             }
         </CssVarsProvider>
     )
