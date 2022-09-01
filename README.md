@@ -8,7 +8,7 @@ In the folder where the yarn.lock file is, type `yarn install` into the terminal
 - `yarn start` runs the app in development mode.
 - `yarn build` builds the app for production in the build/ folder. A static site server can be started for it by running `serve -s build`.
 
-To host the project on Github pages, follow this guide: https://github.com/gitname/react-gh-pages (Note that the guide uses npm, whilst yarn is used here. For simplicity's sake, yarn should be used to install the module etc. but npm should be fine.)
+To host the project on Github pages, follow this guide: https://github.com/gitname/react-gh-pages. For cleanliness, use yarn instead of npm for the instructions - ie. `yarn add` instead of npm install, and `yarn build` instead of `npm run build` for the predeploy script. To run the deploy script, simply type `yarn deploy`. An example deployment can be seen in the gh-pages branch.
 
 # Simulation Information
 The aims of this simulation are as such:
